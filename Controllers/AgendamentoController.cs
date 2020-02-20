@@ -133,7 +133,7 @@ namespace AgendamentoReunioesApp.Controllers
 
             // Verifica disponibilidade do horario da sala
             var conflito = verificaDisponibilidade(model.SalaId, model.HoraInicio, model.HoraFim, model.Id);
-            if (conflito == null)
+            if (conflito != null)
             {
                 return new ResultViewModel
                 {
@@ -167,17 +167,17 @@ namespace AgendamentoReunioesApp.Controllers
 
         [Route("v1/agendamentos")]
         [HttpDelete]
-        public ResultViewModel Delete([FromBody]int id)
+        public ResultViewModel Delete([FromBody]EditorAgendamentoViewModel model)
         {
-            var agendamento = _context.Agendamentos.Find(id);
+            var agendamento = _context.Agendamentos.Find(model.Id);
             _context.Agendamentos.Remove(agendamento);
             _context.SaveChanges();
 
             return new ResultViewModel
             {
                 Success = true,
-                Message = "Agendamento atualizado com sucesso!",
-                Data = agendamento
+                Message = "Agendamento deletado com sucesso!",
+                Data = "Agendamento deletado"
             };
         }
 

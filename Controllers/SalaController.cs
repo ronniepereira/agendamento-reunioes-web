@@ -61,10 +61,10 @@ namespace AgendamentoReunioesApp.Controllers
 
         [Route("v1/salas")]
         [HttpDelete]
-        public Sala Delete([FromBody]int id)
+        public Sala Delete([FromBody]Sala sala)
         {
-            var sala = _context.Salas.Find(id);
-            _context.Salas.Remove(sala);
+            var sala_find = _context.Salas.Find(sala.Id);
+            _context.Salas.Remove(sala_find);
             _context.SaveChanges();
 
             return sala;
