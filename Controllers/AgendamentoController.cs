@@ -19,19 +19,21 @@ namespace AgendamentoReunioesApp.Controllers
             _context = context;
         }
 
-        public Boolean verificaDisponibilidade(int salaId, DateTime horainicio, DateTime horafim)
+        private Agendamento verificaDisponibilidade(int salaId, DateTime horaInicio, DateTime horaFim, int agendamentoId = 0)
         {
-            var conflito = _context.Agendamentos
+            return _context.Agendamentos
                 .Include(x => x.Sala)
-                .Where(x => x.SalaId == salaId && (
-                    (horainicio >= x.HoraInicio.Date && horainicio <= x.HoraFim.Date) ||
-                    (horafim >= x.HoraInicio.Date && horafim <= x.HoraFim.Date) ||
-                    (horainicio <= x.HoraInicio.Date && horafim >= x.HoraFim.Date)
-                ))
+                .Where(x =>
+                    x.SalaId == salaId
+                    && (
+                        (horaInicio >= x.HoraInicio.Date && horaInicio <= x.HoraFim.Date) ||
+                        (horaFim >= x.HoraInicio.Date && horaFim <= x.HoraFim.Date) ||
+                        (horaInicio <= x.HoraInicio.Date && horaFim >= x.HoraFim.Date)
+                    )
+                    &&
+                    x.Id != agendamentoId)
                 .AsNoTracking()
-                .Count();
-
-            return conflito == 0 ? true : false;
+                .FirstOrDefault();
         }
 
         [Route("v1/agendamentos")]
@@ -80,13 +82,18 @@ namespace AgendamentoReunioesApp.Controllers
             }
 
             // Verifica disponibilidade do horario da sala
-            if (verificaDisponibilidade(model.SalaId, model.HoraInicio, model.HoraFim) == false)
+            var conflito = verificaDisponibilidade(model.SalaId, model.HoraInicio, model.HoraFim);
+            if (conflito != null)
             {
                 return new ResultViewModel
                 {
                     Success = true,
-                    Message = "Tente outro horario e/ou outra sala",
-                    Data = "Infelizmente essa sala já está agendada nesse horario"
+                    Message = "Conflito de horário detectado",
+                    Data = new
+                    {
+                        HoraInicio = conflito.HoraInicio,
+                        HoraFim = conflito.HoraFim
+                    }
                 };
             }
 
@@ -125,13 +132,18 @@ namespace AgendamentoReunioesApp.Controllers
             }
 
             // Verifica disponibilidade do horario da sala
-            if (verificaDisponibilidade(model.SalaId, model.HoraInicio, model.HoraFim) == false)
+            var conflito = verificaDisponibilidade(model.SalaId, model.HoraInicio, model.HoraFim, model.Id);
+            if (conflito == null)
             {
                 return new ResultViewModel
                 {
                     Success = true,
-                    Message = "Tente outro horário",
-                    Data = "Infelizmente esse horário já está ocupado"
+                    Message = "Conflito de horário detectado",
+                    Data = new
+                    {
+                        HoraInicio = conflito.HoraInicio,
+                        HoraFim = conflito.HoraFim
+                    }
                 };
             }
 
