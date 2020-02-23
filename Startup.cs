@@ -17,6 +17,7 @@ namespace AgendamentoReunioesApp
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddResponseCompression();
 
@@ -30,6 +31,12 @@ namespace AgendamentoReunioesApp
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(
+                options => options.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+            );
 
             app.UseMvc();
             app.UseResponseCompression();

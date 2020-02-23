@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AgendamentoReunioesApp.Data;
 using AgendamentoReunioesApp.Models;
+using AgendamentoReunioesApp.ViewModels;
 
 namespace AgendamentoReunioesApp.Controllers
 {
@@ -18,7 +19,6 @@ namespace AgendamentoReunioesApp.Controllers
 
         [Route("v1/salas")]
         [HttpGet]
-        [ResponseCache(Duration = 3600)]
         public IEnumerable<Sala> Get()
         {
             return _context.Salas.AsNoTracking().ToList();
@@ -59,15 +59,20 @@ namespace AgendamentoReunioesApp.Controllers
             return sala;
         }
 
-        [Route("v1/salas")]
+        [Route("v1/salas/{id:int}")]
         [HttpDelete]
-        public Sala Delete([FromBody]Sala sala)
+        public ResultViewModel Delete(int id)
         {
-            var sala_find = _context.Salas.Find(sala.Id);
+            var sala_find = _context.Salas.Find(id);
             _context.Salas.Remove(sala_find);
             _context.SaveChanges();
 
-            return sala;
+            return new ResultViewModel
+            {
+                Success = true,
+                Message = "Sala deletado com sucesso!",
+                Data = "Sala deletado"
+            };
         }
     }
 }
