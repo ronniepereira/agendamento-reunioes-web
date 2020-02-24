@@ -87,13 +87,9 @@ namespace AgendamentoReunioesApp.Controllers
             {
                 return new ResultViewModel
                 {
-                    Success = true,
+                    Success = false,
                     Message = "Conflito de horário detectado",
-                    Data = new
-                    {
-                        HoraInicio = conflito.HoraInicio,
-                        HoraFim = conflito.HoraFim
-                    }
+                    Data = "Horário conflitante: " + conflito.HoraInicio + " até " + conflito.HoraFim
                 };
             }
 

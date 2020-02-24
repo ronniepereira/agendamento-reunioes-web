@@ -49,8 +49,8 @@ namespace AgendamentoReunioesApp.Controllers
             return sala;
         }
 
-        [HttpPut]
         [Route("v1/salas")]
+        [HttpPut]
         public Sala Put([FromBody]Sala sala)
         {
             _context.Entry<Sala>(sala).State = EntityState.Modified;

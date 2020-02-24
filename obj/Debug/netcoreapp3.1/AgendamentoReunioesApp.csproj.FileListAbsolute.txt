@@ -65,8 +65,8 @@
 /home/vinnicius/dev/dotnet/AgendamentoReunioesApp/obj/Debug/netcoreapp3.1/AgendamentoReunioesApp.pdb
 /home/vinnicius/dev/dotnet/AgendamentoReunioesApp/bin/Debug/netcoreapp3.1/Flunt.dll
 /home/vinnicius/dev/dotnet/AgendamentoReunioesApp/bin/Debug/netcoreapp3.1/vue-agendamentoreunioes-web/package.json
-/home/vinnicius/dev/dotnet/AgendamentoReunioesApp/bin/Debug/netcoreapp3.1/vue-agendamentoreunioes-web/package-lock.json
 /home/vinnicius/dev/dotnet/AgendamentoReunioesApp/bin/Debug/netcoreapp3.1/System.Web.Cors.dll
 /home/vinnicius/dev/dotnet/AgendamentoReunioesApp/bin/Debug/netcoreapp3.1/System.Net.Http.Formatting.dll
 /home/vinnicius/dev/dotnet/AgendamentoReunioesApp/bin/Debug/netcoreapp3.1/System.Web.Http.dll
 /home/vinnicius/dev/dotnet/AgendamentoReunioesApp/bin/Debug/netcoreapp3.1/System.Web.Http.Cors.dll
+/home/vinnicius/dev/dotnet/AgendamentoReunioesApp/bin/Debug/netcoreapp3.1/vue-agendamentoreunioes-web/package-lock.json
