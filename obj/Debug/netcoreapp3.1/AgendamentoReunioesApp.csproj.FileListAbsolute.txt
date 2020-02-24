@@ -70,3 +70,8 @@
 /home/vinnicius/dev/dotnet/AgendamentoReunioesApp/bin/Debug/netcoreapp3.1/System.Web.Http.dll
 /home/vinnicius/dev/dotnet/AgendamentoReunioesApp/bin/Debug/netcoreapp3.1/System.Web.Http.Cors.dll
 /home/vinnicius/dev/dotnet/AgendamentoReunioesApp/bin/Debug/netcoreapp3.1/vue-agendamentoreunioes-web/package-lock.json
+/home/vinnicius/dev/dotnet/AgendamentoReunioesApp/obj/Debug/netcoreapp3.1/AgendamentoReunioesApp.MvcApplicationPartsAssemblyInfo.cs
+/home/vinnicius/dev/dotnet/AgendamentoReunioesApp/bin/Debug/netcoreapp3.1/Microsoft.OpenApi.dll
+/home/vinnicius/dev/dotnet/AgendamentoReunioesApp/bin/Debug/netcoreapp3.1/Swashbuckle.AspNetCore.Swagger.dll
+/home/vinnicius/dev/dotnet/AgendamentoReunioesApp/bin/Debug/netcoreapp3.1/Swashbuckle.AspNetCore.SwaggerGen.dll
+/home/vinnicius/dev/dotnet/AgendamentoReunioesApp/bin/Debug/netcoreapp3.1/Swashbuckle.AspNetCore.SwaggerUI.dll

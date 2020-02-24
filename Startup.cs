@@ -7,7 +7,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Rewrite;
 using AgendamentoReunioesApp.Data;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace AgendamentoReunioesApp
 {
@@ -21,6 +24,11 @@ namespace AgendamentoReunioesApp
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddResponseCompression();
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Agendamento de Reuniões App", Version = "v1" });
+            });
+
             services.AddScoped<StoreDataContext, StoreDataContext>();
         }
 
@@ -32,11 +40,20 @@ namespace AgendamentoReunioesApp
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Meeting Room Manager API");
+            });
+            var option = new RewriteOptions();
+            option.AddRedirect("^$", "swagger");
+
             app.UseCors(
                 options => options.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader()
             );
+
 
             app.UseMvc();
             app.UseResponseCompression();
