@@ -4,13 +4,13 @@ import Agenda from "../views/Agenda.vue";
 import Admin from "../views/Admin.vue";
 import ReservarSala from "../components/ReservarSala.vue";
 import AgendaCompleta from "../components/AgendaCompleta.vue";
+import AgendaDisponivel from "../components/AgendaDisponivel.vue";
 import SalaGerenciar from "../components/SalaGerenciar.vue";
 import SalaCriar from "../components/SalaCriar.vue";
 
 Vue.use(VueRouter);
 
-const routes = [
-  {
+const routes = [{
     path: "/",
     redirect: {
       name: "agenda.completa"
@@ -19,8 +19,7 @@ const routes = [
   {
     path: "/admin",
     component: Admin,
-    children: [
-      {
+    children: [{
         path: "",
         redirect: {
           name: "sala.criar"
@@ -41,8 +40,7 @@ const routes = [
   {
     path: "/agenda",
     component: Agenda,
-    children: [
-      {
+    children: [{
         path: "",
         redirect: {
           name: "agenda.completa"
@@ -52,6 +50,11 @@ const routes = [
         path: "completa",
         name: "agenda.completa",
         component: AgendaCompleta
+      },
+      {
+        path: "disponivel",
+        name: "agenda.disponivel",
+        component: AgendaDisponivel
       },
       {
         path: "reservar",
@@ -67,7 +70,7 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+      import( /* webpackChunkName: "about" */ "../views/About.vue")
   }
 ];
 

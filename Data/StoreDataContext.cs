@@ -9,7 +9,7 @@ namespace AgendamentoReunioesApp.Data
         public DbSet<Sala> Salas { get; set; }
         public DbSet<Agendamento> Agendamentos { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlServer(@"Server=localhost,5434;Database=agendamentoreuniao_app;User ID=SA;Password=Pass@word");
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlServer(@"Server=localhost,5434;Database=agenda_app_v2;User ID=SA;Password=Pass@word");
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

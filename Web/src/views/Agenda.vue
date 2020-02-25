@@ -6,6 +6,9 @@
           <router-link :to="{ name: 'reservar.sala' }">Reservar sala</router-link>
         </li>
         <li>
+          <router-link :to="{ name: 'agenda.disponivel' }">Salas disponiveis</router-link>
+        </li>
+        <li>
           <router-link :to="{ name: 'agenda.completa' }">Agenda completa</router-link>
         </li>
       </ul>

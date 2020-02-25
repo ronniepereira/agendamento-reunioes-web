@@ -1,21 +1,17 @@
 <template>
   <section class="agenda">
-    <h1>Agenda completa</h1>
+    <h1>Salas Disponiveis</h1>
     <table>
       <thead>
         <tr>
-          <th>Titulo reunião</th>
-          <th>Hora de inicio</th>
-          <th>Hora de finalização</th>
-          <th>Sala</th>
+          <th>Nome</th>
+          <th>Disponibilidade</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="agendamento in agendamentos" :key="agendamento.id">
-          <td>{{ agendamento.titulo }}</td>
-          <td>{{ agendamento.horaInicio | formatDate }}</td>
-          <td>{{ agendamento.horaFim | formatDate }}</td>
-          <td>{{ agendamento.sala }}</td>
+        <tr v-for="sala in salas" :key="sala.id">
+          <td>{{ sala.nome }}</td>
+          <td>{{ sala.reservado | reservado }}</td>
         </tr>
       </tbody>
     </table>
@@ -27,19 +23,21 @@ import { api } from "../helpers/services";
 export default {
   data() {
     return {
-      agendamentos: []
+      salas: []
     };
   },
   methods: {
-    getAgendamentos() {
-      api.get("agendamentos").then(res => {
-        this.agendamentos = res.data;
-        console.log(res.data);
-      });
+    getSalas() {
+      api.get("salas").then(res => (this.salas = res.data));
     }
   },
   created() {
-    this.getAgendamentos();
+    this.getSalas();
+  },
+  filters: {
+    reservado: function(value) {
+      return value == true ? "Ocupada" : "Disponivel";
+    }
   }
 };
 </script>

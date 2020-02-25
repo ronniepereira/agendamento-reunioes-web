@@ -9419,11 +9419,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/vinnicius/dev/dotnet/AgendamentoReunioesApp/AgendamentoReunioesApp.csproj",
+      "projectUniqueName": "/home/vinnicius/dev/agendamento-reunioes-web/AgendamentoReunioesApp.csproj",
       "projectName": "AgendamentoReunioesApp",
-      "projectPath": "/home/vinnicius/dev/dotnet/AgendamentoReunioesApp/AgendamentoReunioesApp.csproj",
+      "projectPath": "/home/vinnicius/dev/agendamento-reunioes-web/AgendamentoReunioesApp.csproj",
       "packagesPath": "/home/vinnicius/.nuget/packages/",
-      "outputPath": "/home/vinnicius/dev/dotnet/AgendamentoReunioesApp/obj/",
+      "outputPath": "/home/vinnicius/dev/agendamento-reunioes-web/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/vinnicius/.nuget/NuGet/NuGet.Config"

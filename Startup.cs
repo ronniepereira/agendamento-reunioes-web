@@ -43,7 +43,7 @@ namespace AgendamentoReunioesApp
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Meeting Room Manager API");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Agendamento de Reuniões App");
             });
             var option = new RewriteOptions();
             option.AddRedirect("^$", "swagger");
