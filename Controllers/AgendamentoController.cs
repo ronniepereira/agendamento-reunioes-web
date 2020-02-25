@@ -111,9 +111,9 @@ namespace AgendamentoReunioesApp.Controllers
             };
         }
 
-        [Route("v1/agendamentos")]
+        [Route("v1/agendamentos/{id:int}")]
         [HttpPut]
-        public ResultViewModel Put([FromBody]EditorAgendamentoViewModel model)
+        public ResultViewModel Put([FromBody]EditorAgendamentoViewModel model, int id)
         {
             // Validação minima
             model.Validate();
@@ -143,7 +143,7 @@ namespace AgendamentoReunioesApp.Controllers
                 };
             }
 
-            var agendamento = _context.Agendamentos.Find(model.Id);
+            var agendamento = _context.Agendamentos.Find(id);
             agendamento.Titulo = model.Titulo;
             agendamento.HoraInicio = model.HoraInicio;
             agendamento.HoraFim = model.HoraFim;
@@ -161,11 +161,11 @@ namespace AgendamentoReunioesApp.Controllers
             };
         }
 
-        [Route("v1/agendamentos")]
+        [Route("v1/agendamentos/{id:int}")]
         [HttpDelete]
-        public ResultViewModel Delete([FromBody]EditorAgendamentoViewModel model)
+        public ResultViewModel Delete(int id)
         {
-            var agendamento = _context.Agendamentos.Find(model.Id);
+            var agendamento = _context.Agendamentos.Find(id);
             _context.Agendamentos.Remove(agendamento);
             _context.SaveChanges();
 

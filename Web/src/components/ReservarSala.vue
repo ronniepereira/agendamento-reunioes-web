@@ -6,21 +6,15 @@
     </div>
     <form class="reserva">
       <label for="titulo">Titulo reunião</label>
-      <input
-        id="titulo"
-        name="titulo"
-        type="text"
-        v-model="agendamento.titulo"
-        required
-      />
+      <input id="titulo" name="titulo" type="text" v-model="agendamento.titulo" required />
       <div class="horario">
         <div class="hora">
           <label for="horainicio">Hora de inicio</label>
-          <datetime v-model="agendamento.horaInicio" type="datetime"></datetime>
+          <datetime v-model="agendamento.horaInicio" type="datetime" zone="America/Sao_Paulo"></datetime>
         </div>
         <div class="hora">
           <label for="horafim">Hora Fim</label>
-          <datetime v-model="agendamento.horaFim" type="datetime"></datetime>
+          <datetime v-model="agendamento.horaFim" type="datetime" zone="America/Sao_Paulo"></datetime>
         </div>
       </div>
 
@@ -44,6 +38,7 @@
 import Multiselect from "vue-multiselect";
 import { Datetime } from "vue-datetime";
 import { api } from "../helpers/services";
+import moment from "moment";
 import "vue-datetime/dist/vue-datetime.css";
 
 export default {
@@ -70,8 +65,12 @@ export default {
       api
         .post("agendamentos", {
           Titulo: this.agendamento.titulo,
-          HoraInicio: this.agendamento.horaInicio,
-          HoraFim: this.agendamento.horaFim,
+          HoraInicio: moment(this.agendamento.horaInicio)
+            .utcOffset("-03:00")
+            .format("YYYY-MM-DDTHH:mm:ss"),
+          HoraFim: moment(this.agendamento.horaFim)
+            .utcOffset("-03:00")
+            .format("YYYY-MM-DDTHH:mm:ss"),
           SalaId: this.salaSelecionada.id
         })
         .then(res => {
@@ -84,7 +83,6 @@ export default {
               : (this.error = mensagemDeErro);
           }
         });
-      console.log(this.salaSelecionada.id);
     },
     getSalas() {
       api.get("salas").then(res => {

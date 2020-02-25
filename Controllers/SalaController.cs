@@ -1,10 +1,12 @@
-using System.Collections.Generic;
+using System;
 using System.Linq;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AgendamentoReunioesApp.Data;
 using AgendamentoReunioesApp.Models;
 using AgendamentoReunioesApp.ViewModels;
+using AgendamentoReunioesApp.ViewModels.SalaViewModel;
 
 namespace AgendamentoReunioesApp.Controllers
 {
@@ -19,9 +21,16 @@ namespace AgendamentoReunioesApp.Controllers
 
         [Route("v1/salas")]
         [HttpGet]
-        public IEnumerable<Sala> Get()
+        public IEnumerable<ListSalaViewModel> Get()
         {
-            return _context.Salas.AsNoTracking().ToList();
+            return _context.Salas.AsNoTracking()
+                .Select(x => new ListSalaViewModel
+                {
+                    Id = x.Id,
+                    Nome = x.Nome,
+                    Reservado = DateTime.UtcNow > x.Agendamentos.FirstOrDefault().HoraInicio && DateTime.UtcNow <= x.Agendamentos.FirstOrDefault().HoraFim,
+                })
+                .AsEnumerable();
         }
 
         [Route("v1/salas/{id}")]
@@ -44,16 +53,6 @@ namespace AgendamentoReunioesApp.Controllers
         public Sala Post([FromBody]Sala sala)
         {
             _context.Salas.Add(sala);
-            _context.SaveChanges();
-
-            return sala;
-        }
-
-        [Route("v1/salas")]
-        [HttpPut]
-        public Sala Put([FromBody]Sala sala)
-        {
-            _context.Entry<Sala>(sala).State = EntityState.Modified;
             _context.SaveChanges();
 
             return sala;

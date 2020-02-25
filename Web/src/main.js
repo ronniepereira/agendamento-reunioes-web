@@ -18,6 +18,6 @@ new Vue({
 
 Vue.filter('formatDate', function (value) {
   if (value) {
-    return moment(String(value)).format('DD/MM/YY hh:mm')
+    return moment(String(value)).format('DD/MM/YY HH:mm')
   }
 })
